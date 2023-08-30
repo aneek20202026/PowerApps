@@ -1,0 +1,141 @@
+.header{
+    /* display: flex; */
+    background-color:lightblue;
+    height:fit-content;
+    margin-top:-20px;
+    padding-top: 10px;
+    overflow:hidden;
+}
+.textHead{
+    margin-top:30px;
+    /* padding-right: -30px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* background-color: aqua; */
+}
+.textHead p{
+    font-size: 30px;
+    font-weight: bold;
+}
+.dropdown-container{
+    height: 25px;
+    background-color: white;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding-left: 20px;
+}
+.dropdown-container .up{
+    display: flex;
+    justify-content: space-between;
+}
+.drop{
+    /* border: 2px; */
+    height: 25px;
+    cursor: pointer;
+    padding: 0;
+}
+.drop img{
+    width: 20px;
+    height: 20px;
+}
+.dropdown-options{
+    margin-top: 1px;
+    width:210px;
+    list-style: none;
+    background-color: white;
+    width:150px;
+    border:1px solid black;
+    border-radius: 4px;
+}
+.dropdown-option{
+    margin-left: -61px;
+    background-color: white;
+    border:1px solid black;
+    width:210px;
+}
+.textHead .right textarea{
+    border: 2px solid blue;
+    border-radius: 6px;
+    padding: 10px;
+}
+.answer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+.answer .left{
+    width: 280px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.answer .left .type{
+    width: 150px;
+    cursor: pointer;
+}
+.answer .center{
+    width: 350px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.answer .center .length{
+    width: 200px;
+    cursor: pointer;
+}
+.answer .end{
+    /* background-color: black; */
+    padding-top: 15px;
+    /* padding-left: 20px; */
+}
+.answer .end button{
+    cursor: pointer;
+    font-size: 21px;
+    width: 90px;
+    border-radius: 4px;
+    color: white;
+    background-color: red;
+}
+.choice{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.choice .choose{
+    width: 1080px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    /* background-color: aqua; */
+}
+.choice .choose .questions{
+    /* background-color: aqua; */
+    padding-top: 8px;
+    padding-right: 19px;
+    /* cursor: pointer; */
+}
+.choice .submit button{
+    font-weight: bold;
+    cursor: pointer;
+    font-size: large;
+    width: 150px;
+    height:40px;
+    border-radius: 4px;
+    color: white;
+    background-color: blue;
+}
+.remarks{
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+.remarks textarea{
+    padding: 10px;
+    background:none;
+    border-radius: 4px;
+    border: 2px solid black;
+}
