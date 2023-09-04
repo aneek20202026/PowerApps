@@ -1,17 +1,17 @@
 import React,{useState} from "react";
 import '../design/page1.css';
-import Image from '../design/down-filled-triangular-arrow.png';
+import Image from '../design/arrow-down-sign-to-navigate.png';
 
 function Page1(){
 
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOption, setSelectedOption] = useState('--Select--');
     const[text,setText]=useState('');
     const[remark,setRemark]=useState('');
     const [radio, setRadio] = useState('');
     const[type,setType]=useState(1);
     const[length,setLength]=useState(1);
-    const options = ['Option1','Option2','Option3','Option4','Option5'];
+    const options = ['--Select--','Option1','Option2','Option3','Option4','Option5'];
 
     const toggleDropdown=()=>{setIsOpen(!isOpen);};
     const Radio=(e)=>{setRadio(e.target.value);};
@@ -23,7 +23,7 @@ function Page1(){
         setText('');
         setRemark('');
         setRadio('');
-        setSelectedOption(null);
+        setSelectedOption('--Select--');
         setLength(1);
         setType(1);
     };
@@ -36,7 +36,7 @@ function Page1(){
         setLength(newValue);
     };
     const submit=(e)=>{
-        if(text==='' || remark===''|| radio==='' || selectedOption===null){
+        if(text==='' || remark===''|| radio==='' || selectedOption==='--Select--'){
             window.alert("All fields are mandatory!!");
         }
         else{
@@ -62,7 +62,7 @@ function Page1(){
                     <div className="dropdown-container">
                         <div className="up">
                             <text className="dropdown-text" >
-                                {selectedOption || 'Select an option'}
+                                {selectedOption}
                             </text>
                             <button className="drop" onClick={toggleDropdown}><img src={Image} alt="Button" /></button>
                         </div>
@@ -120,12 +120,16 @@ function Page1(){
             </div>
             <div className="choice">
                 <div className="choose">
-                    <input type="radio" value="Get synopsis"  checked={radio === 'Get synopsis'} onChange={Radio}/><text className="questions">Get Synopsis</text>
-                    <input type="radio" value="Correct Grammar" checked={radio === 'Correct Grammar'} onChange={Radio}/><text className="questions">Correct Grammar</text>
-                    <input type="radio" value="Simplify Text" checked={radio === 'Simplify Text'} onChange={Radio}/><text className="questions">Simplify Text</text>
-                    <input type="radio" value="Get Keywords" checked={radio === 'Get Keywords'} onChange={Radio}/><text className="questions">Get Keywords</text>
-                    <input type="radio" value="Notes to Summary" checked={radio === 'Notes to Summary'} onChange={Radio}/><text className="questions">Notes to Summary</text>
-                    <input type="radio" value="Answer the Question" checked={radio === 'Answer the Question'} onChange={Radio}/><text className="questions">Answer the Question</text>
+                    <div>
+                        <input type="radio" value="Get synopsis"  checked={radio === 'Get synopsis'} onChange={Radio}/><text className="questions">Get Synopsis</text>
+                        <input type="radio" value="Correct Grammar" checked={radio === 'Correct Grammar'} onChange={Radio}/><text className="questions">Correct Grammar</text>
+                        <input type="radio" value="Simplify Text" checked={radio === 'Simplify Text'} onChange={Radio}/><text className="questions">Simplify Text</text>
+                    </div>
+                    <div>
+                        <input type="radio" value="Get Keywords" checked={radio === 'Get Keywords'} onChange={Radio}/><text className="questions">Get Keywords</text>
+                        <input type="radio" value="Notes to Summary" checked={radio === 'Notes to Summary'} onChange={Radio}/><text className="questions">Notes to Summary</text>
+                        <input type="radio" value="Answer the Question" checked={radio === 'Answer the Question'} onChange={Radio}/><text className="questions">Answer the Question</text>
+                    </div>
                 </div>
                 <div className="submit">
                     <form onSubmit={submit}>
