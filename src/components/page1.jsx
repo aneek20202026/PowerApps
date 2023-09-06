@@ -1,22 +1,25 @@
 import React,{useState} from "react";
 import '../design/page1.css';
 import Image from '../design/arrow-down-sign-to-navigate.png';
+import { ReactComponent as Icon } from '../design/icon.svg';
 
 function Page1(){
 
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState('--Select--');
-    const[text,setText]=useState('');
-    const[remark,setRemark]=useState('');
+    const [text,setText]=useState('');
     const [radio, setRadio] = useState('');
-    const[type,setType]=useState(1);
-    const[length,setLength]=useState(1);
+    const [type,setType]=useState(1);
+    const [length,setLength]=useState(1);
     const options = ['--Select--','Option1','Option2','Option3','Option4','Option5'];
+    const [remark,setRemark]=useState('');
+    const arrText=['','opt1','opt2','opt3','opt4','opt5'];
 
     const toggleDropdown=()=>{setIsOpen(!isOpen);};
     const Radio=(e)=>{setRadio(e.target.value);};
-    const handleOptionClick=(option)=>{
+    const handleOptionClick=(option,index)=>{
         setSelectedOption(option);
+        setText(arrText[index])
         setIsOpen(false);
     };
     const clear=()=>{
@@ -35,27 +38,53 @@ function Page1(){
         const newValue = event.target.value;
         setLength(newValue);
     };
-    const submit=(e)=>{
-        if(text==='' || remark===''|| radio==='' || selectedOption==='--Select--'){
+    const submit=()=>{
+        if(text.trim()==='' || radio==='' || selectedOption==='--Select--'){
             window.alert("All fields are mandatory!!");
+            return;
         }
-        else{
-            const arr=[{
-                option: selectedOption,
-                text: text,
-                radio: radio,
-                type: type,
-                length: length,
-                remark: remark
-            }];
-            e.preventDefault()
-            const jsonData = JSON.stringify(arr);
-            window.location.href =`/display?data=${encodeURIComponent(jsonData)}`;
+        postData();
+        // const jsonData = JSON.stringify(arr);
+        // window.location.href =`/display?data=${encodeURIComponent(jsonData)}`;
+        // e.preventDefault();
+    }
+    const fetchData = async () => {
+        try {
+          const response = await fetch('http://127.0.0.1:5000/hello');
+          const jsonData = await response.json();
+          setRemark(jsonData);
+        } catch (e) {
+          setRemark('Error fetching data:', e);
         }
     }
+
+    const postData = () => {
+        const arr=[{
+            text: radio+" "+text.trim(),
+            type: type,
+            length: length
+        }];
+        fetch('http://127.0.0.1:5000/hello', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(arr),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Handle the response from the server here
+            setRemark(data[0].text);
+          })
+          .catch((error) => {
+            // Handle any errors that occur during the request
+            setRemark(error);
+          });
+      };
+
     return(
         <div className="header">
-            <h1>Habibi</h1>
+            <Icon className="icon" onClick={()=>{window.open("https://www.pge.com/")}}/>
             <div className="textHead">
                 <div className="left">
                     <p>Enter your text </p>
@@ -73,7 +102,7 @@ function Page1(){
                                     <li
                                     key={index}
                                     className="dropdown-option"
-                                    onClick={() => handleOptionClick(option)}
+                                    onClick={() => handleOptionClick(option,index)}
                                     >
                                     {option}
                                     </li>
@@ -87,7 +116,7 @@ function Page1(){
                     <textarea
                      className="Query" 
                      value={text} 
-                     onChange={(e) => setText(e.target.value)} 
+                     onChange={(e)=>{setText(e.target.value)}} 
                      cols="110" rows="9"/>
                 </div>
             </div>
@@ -132,16 +161,16 @@ function Page1(){
                     </div>
                 </div>
                 <div className="submit">
-                    <form onSubmit={submit}>
+                    <div onClick={submit}>
                         <button type="submit">Submit</button>
-                    </form>
+                    </div>
                 </div>
             </div>
             <div className="remarks">
                 <textarea 
                     name="remark"
+                    disabled
                     value={remark}
-                    onChange={(e) => setRemark(e.target.value)} 
                     cols="150"
                     rows="6"/>
             </div>
