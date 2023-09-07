@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import '../design/page1.css';
-import Image from '../design/arrow-down-sign-to-navigate.png';
-import { ReactComponent as Icon } from '../design/icon.svg';
+import Image from '../images/arrow-down-sign-to-navigate.png';
+import { ReactComponent as Icon } from '../images/icon.svg';
 
 function Page1(){
 
